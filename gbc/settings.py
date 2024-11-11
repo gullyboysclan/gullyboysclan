@@ -138,7 +138,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-# #Google Cloud Storage settings
+#Google Cloud Storage settings
 GS_PROJECT_ID = 'precise-line-437900-m9'
 GS_BUCKET_NAME = 'activistimages'
 
@@ -156,8 +156,9 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
 
 # Media files (uploads)
 GS_MEDIA_BUCKET_NAME = GS_BUCKET_NAME
-
 MEDIA_URL = f'https://storage.googleapis.com/{GS_MEDIA_BUCKET_NAME}/'
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -166,7 +167,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = 'productionFiles'
 
 MEDIA_ROOT = 'media/'
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
