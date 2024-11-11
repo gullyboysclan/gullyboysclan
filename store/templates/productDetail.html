@@ -1,0 +1,355 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'store.css' %}">
+    <style>
+        body {
+            font-family: "Uncut Sans Medium", sans-serif;
+        }
+
+        .main-side {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap:50px;
+        }
+
+        .side-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 50%;
+            align-items: center;
+        }
+
+        .plus-minus-info {
+           
+            width: 450px;
+        }
+
+        .plus-minus-info .infoBox{
+            width: 100%;
+            padding: 8px;
+            border-top: 1px solid black;
+        }
+        .plus-minus-btn{
+            font-size: 20px;
+            padding-right: 10px;
+        }
+
+    
+
+        .main-image {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4 / 5;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            object-position: center;
+        }
+        .productName{
+            font-size: large;
+            font-weight: bold;
+        }
+        /* Size Selector Container */
+.size-selector {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Size Option Button */
+.size-option {
+    width: 50px;
+    height: 25px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-family: "Uncut Sans Medium", sans-serif;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.size-option:hover {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+}
+/* Hide the default number input controls */
+.no-arrows::-webkit-inner-spin-button,
+.no-arrows::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-arrows {
+    -moz-appearance: textfield; /* For Firefox */
+    text-align: center;
+    width: 40px;
+}
+
+/* Active/Selected State */
+.size-option.active {
+    background-color: black;
+    color: #fff;
+    border-color: black;
+}
+
+#addToCart{
+    border: 1px solid black; 
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+#addToCart:hover{
+    background-color: #000;
+    color: #fff;
+    
+}
+/* Quantity Box Container */
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Input Number Box */
+.quantity-input {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Uncut Sans Medium", sans-serif;
+}
+
+/* Custom Buttons */
+.decrease-btn,
+.increase-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover Effect */
+.decrease-btn:hover,
+.increase-btn:hover {
+    background-color: #333;
+}
+
+/* Remove Default Number Input Arrows */
+.no-arrows::-webkit-inner-spin-button,
+.no-arrows::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-arrows {
+    -moz-appearance: textfield;
+}
+.contentBox{
+    display: none;
+}
+/* Responsive */
+@media (max-width: 600px) {
+    .size-option {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+
+        @media screen and (max-width: 810px) {
+            .main-side {
+                flex-direction: column;
+            }
+
+            .side-info {
+                width: 100%;
+            }
+
+            .product-image {
+                max-width: 300px;
+                width: 90%;
+            }
+
+            .plus-minus-info {
+                width: 94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-box">
+        <div class="img-box">
+            <img src="{% static 'img/logo_outline2.svg' %}" style="padding: 0px 10px;" alt="">
+        </div>
+        <div class="left-box">
+            <span>
+                <svg fill="#000000" width="35px" height="35px" viewBox="0 0 256 256" id="Flat"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M216,68H171.81006a43.99152,43.99152,0,0,0-87.62012,0H40A12.01312,12.01312,0,0,0,28,80V208a12.01312,12.01312,0,0,0,12,12H216a12.01312,12.01312,0,0,0,12-12V80A12.01312,12.01312,0,0,0,216,68ZM128,36a36.04775,36.04775,0,0,1,35.77246,32H92.22754A36.04775,36.04775,0,0,1,128,36Zm92,172a4.004,4.004,0,0,1-4,4H40a4.004,4.004,0,0,1-4-4V80a4.004,4.004,0,0,1,4-4H84v28a4,4,0,0,0,8,0V76h72v28a4,4,0,0,0,8,0V76h44a4.004,4.004,0,0,1,4,4Z">
+                    </path>
+                </svg>
+            </span>
+            <span>
+                <svg width="35px" height="35px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 8.1H19V6.9H6V8.1ZM6 18.1H19V16.9H6V18.1ZM6 13.1H19V11.9H6V13.1Z" fill="#121923"></path>
+                </svg>
+            </span>
+        </div>
+    </div>
+    <div class="productDetailBox" style="margin-top: 80px;">
+        <div class="main-side">
+            <div class="MainImage">
+                <img src="{{product.image.url}}" alt="{{product.name}}" class="product-image">
+            </div>
+            <div class="side-info">
+                <div>
+                    <div class="productName">{{product.name}}</div>
+                    <div style="text-align: center; font-size: medium; font-weight: bold;">GHS{{product.price}}</div>
+                  
+                </div>
+
+                <div class="plus-minus-info">
+                    <div class="infoBox">
+                      <div style="display: flex; align-items: center;"><span class="plus-minus-btn">+</span><span>Details</span></div>
+                            <div class="contentBox">
+                                100% COTTON
+                                TRUE TO SIZE
+                                SCREEN PRINTED
+                            </div>
+                    </div>
+                    <div class="infoBox" style="border-bottom: 1px solid black;">
+                        <div style="display: flex; align-items: center;"><span class="plus-minus-btn">+</span><span>Size guide</span></div>
+                        <div class="contentBox">
+                            size guide
+                        </div>
+                    
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; margin: 10px 0px;">
+                    <div class="quantity-box">
+                        <button class="decrease-btn">-</button>
+                        <input type="number" min="1" value="1" class="quantity-input no-arrows" readonly>
+                        <button class="increase-btn">+</button>
+                    </div>
+
+                    <div class="size-selector">
+                        <button class="size-option" data-size="M">M</button>
+                        <button class="size-option" data-size="L">L</button>
+                        <button class="size-option" data-size="XL">XL</button>
+                    </div>
+
+                </div>
+                <div id="addToCart">
+                    add to cart
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-box" style="width: 100%;">
+        <div style="display: flex; justify-content: center; gap: 20px; border-top: 1px solid #f0f0f0; padding: 30px;">
+            <div>Lookbook</div>
+            <div>Contact</div>
+        </div>
+        <div style="color:#9d9d9d; border-top: 1px solid #f0f0f0; padding: 40px 0px; margin: 0px 10px;">
+            &copy; GullyBoysClan 2024
+        </div>
+    </div>
+</body>
+<script>
+    infoBoxes = document.querySelectorAll('.infoBox')
+
+    infoBoxes.forEach(box =>{
+        box.onclick = () => {
+            sign = box.querySelector('.plus-minus-btn')
+            if (sign.textContent.trim() == '+'){
+                contentBox = box.querySelector('.contentBox')
+                contentBox.style.display = 'block'
+                sign.textContent = '-'
+            }
+            else if (sign.textContent.trim() == '-') {
+                contentBox = box.querySelector('.contentBox')
+                contentBox.style.display = 'none'
+                sign.textContent = '+'
+            }
+        }
+    })
+
+</script>
+<script>// Get all size options
+    const sizeOptions = document.querySelectorAll('.size-option');
+
+    // Add click event listener
+    sizeOptions.forEach((option) => {
+        option.addEventListener('click', () => {
+            // Remove active class from all options
+            sizeOptions.forEach((btn) => btn.classList.remove('active'));
+            // Add active class to the clicked option
+            option.classList.add('active');
+        });
+    });
+</script>
+<script>
+    // Select elements
+        const decreaseBtn = document.querySelector('.decrease-btn');
+        const increaseBtn = document.querySelector('.increase-btn');
+        const quantityInput = document.querySelector('.quantity-input');
+
+        // Decrease button click event
+        decreaseBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value) || 1;
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        // Increase button click event
+        increaseBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value) || 1;
+            quantityInput.value = currentValue + 1;
+        });
+
+        // Prevent manual input of non-numeric values
+        quantityInput.addEventListener('input', () => {
+            if (quantityInput.value === '' || parseInt(quantityInput.value) < 1) {
+                quantityInput.value = 1;
+            }
+        });
+
+</script>
+</html>

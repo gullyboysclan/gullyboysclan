@@ -1,0 +1,213 @@
+
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Uncut Sans Medium", sans-serif;
+        }
+
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            /* Full height */
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .nav-box {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Ensure it's above the slideshow */
+        }
+
+        .footer-box {
+          
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'store.css' %}">
+</head>
+
+<body>
+    <div class="bg">
+        <!-- Slideshow Container -->
+        <div class="slide-container">
+            <div class="slide" id="S1"></div>
+            <div class="slide" id="S2"></div>
+            <div class="slide" id="S3"></div>
+        </div>
+
+        <!-- Navigation Box -->
+        <div class="nav-box" >
+            <div class="img-box">
+                <img src="{% static 'img/logo_outline2.svg' %}" alt="" style="padding: 0px 10px;">
+            </div>
+            <div class="left-box">
+                <span><svg fill="#000000" width="35px" height="35px" viewBox="0 0 256 256" id="Flat"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M216,68H171.81006a43.99152,43.99152,0,0,0-87.62012,0H40A12.01312,12.01312,0,0,0,28,80V208a12.01312,12.01312,0,0,0,12,12H216a12.01312,12.01312,0,0,0,12-12V80A12.01312,12.01312,0,0,0,216,68ZM128,36a36.04775,36.04775,0,0,1,35.77246,32H92.22754A36.04775,36.04775,0,0,1,128,36Zm92,172a4.004,4.004,0,0,1-4,4H40a4.004,4.004,0,0,1-4-4V80a4.004,4.004,0,0,1,4-4H84v28a4,4,0,0,0,8,0V76h72v28a4,4,0,0,0,8,0V76h44a4.004,4.004,0,0,1,4,4Z">
+                            </path>
+                        </g>
+                    </svg></span>
+                <span><svg width="35px" height="35px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M6 8.1H19V6.9H6V8.1ZM6 18.1H19V16.9H6V18.1ZM6 13.1H19V11.9H6V13.1Z" fill="#121923">
+                            </path>
+                        </g>
+                    </svg></span>
+            </div>
+        </div>
+
+        <!-- Shop Collection Button -->
+        <div
+            style="position: relative; top: 50%; margin: 0 auto; padding: 10px; background-color: white; width: fit-content;">
+            <a href="{% url 'store' %}" style="display: flex; align-items: center;">
+                <span>SHOP COLLECTION</span>
+                <span>
+                    
+                            <?xml version="1.0" standalone="no"?>
+                            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="16.000000pt" height="16.000000pt"
+                                viewBox="0 0 16.000000 16.000000" preserveAspectRatio="xMidYMid meet">
+                        
+                                <g transform="translate(0.000000,16.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                                    <path d="M30 116 c0 -2 8 -10 18 -17 15 -13 16 -12 3 4 -13 16 -21 21 -21 13z" />
+                                    <path d="M129 98 c11 -15 11 -21 0 -35 -12 -17 -12 -17 6 0 19 17 19 17 0 35
+                                                -18 16 -18 16 -6 0z" />
+                                    <path d="M39 53 c-13 -16 -12 -17 4 -4 16 13 21 21 13 21 -2 0 -10 -8 -17 -17z" />
+                                </g>
+                            </svg>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-box">
+        <div style="display: flex; justify-content: center; gap: 20px; border-top: 1px solid #f0f0f0; padding: 30px;">
+            <div>Lookbook</div>
+            <div>Contact</div>
+        </div>
+    <div
+        style="color:#9d9d9d; border-top: 1px solid #f0f0f0; padding: 40px 0px; margin: 0px 10px; display: flex; justify-content: space-between; align-items: center;">
+        <div>&copy; GullyBoysClan 2024</div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <span><svg width="35px" height="35px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
+                            stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
+                            stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#000000">
+                        </rect>
+                        <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#000000"
+                            stroke-linecap="round"></rect>
+                    </g>
+                </svg></span>
+            <span>
+                <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="25px"
+                    height="25px" viewBox="0 0 31.812 26">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M20.877,2.000 C22.519,2.000 24.382,2.652 25.426,3.738 C26.724,3.486 27.949,3.025 29.050,2.386 C28.625,3.687 27.718,4.779 26.540,5.469 C27.693,5.332 28.797,5.035 29.820,4.590 C29.054,5.707 28.087,6.690 26.971,7.477 C26.981,7.715 26.987,7.955 26.987,8.195 C26.987,15.562 21.445,24.000 10.939,24.000 C7.715,24.000 4.507,23.133 1.982,21.551 C2.428,21.605 2.883,21.631 3.343,21.631 C6.019,21.631 8.482,20.740 10.439,19.242 C7.937,19.199 5.827,17.586 5.103,15.373 C5.450,15.437 5.810,15.473 6.178,15.473 C6.696,15.473 7.203,15.406 7.681,15.277 C5.068,14.768 3.100,12.514 3.100,9.813 C3.100,9.787 3.100,9.764 3.100,9.740 C3.871,10.158 4.750,10.410 5.687,10.440 C4.154,9.437 3.147,7.734 3.147,5.799 C3.147,4.777 3.428,3.818 3.919,2.998 C6.735,6.367 10.945,8.588 15.693,8.822 C15.594,8.414 15.543,7.984 15.543,7.553 C15.543,4.473 17.721,2.000 20.877,2.000 M29.820,4.590 L29.825,4.590 M20.877,-0.000 C17.033,-0.000 14.060,2.753 13.614,6.552 C10.425,5.905 7.524,4.204 5.440,1.711 C5.061,1.257 4.503,0.998 3.919,0.998 C3.867,0.998 3.815,1.000 3.763,1.004 C3.123,1.055 2.547,1.413 2.216,1.966 C1.525,3.122 1.159,4.447 1.159,5.799 C1.159,6.700 1.321,7.579 1.625,8.400 C1.300,8.762 1.113,9.238 1.113,9.740 L1.113,9.813 C1.113,11.772 1.882,13.589 3.160,14.952 C3.087,15.294 3.103,15.655 3.215,15.998 C3.657,17.348 4.459,18.510 5.499,19.396 C4.800,19.552 4.079,19.631 3.343,19.631 C2.954,19.631 2.577,19.609 2.222,19.565 C2.141,19.556 2.061,19.551 1.981,19.551 C1.148,19.551 0.391,20.078 0.108,20.886 C-0.202,21.770 0.140,22.753 0.932,23.249 C3.764,25.023 7.318,26.000 10.939,26.000 C17.778,26.000 22.025,22.843 24.383,20.195 C27.243,16.984 28.907,12.718 28.972,8.455 C29.899,7.682 30.717,6.790 31.410,5.792 C31.661,5.458 31.810,5.041 31.810,4.590 C31.810,3.909 31.473,3.308 30.958,2.946 C31.181,2.176 30.925,1.342 30.303,0.833 C29.940,0.537 29.496,0.386 29.049,0.386 C28.708,0.386 28.365,0.474 28.056,0.654 C27.391,1.040 26.680,1.344 25.931,1.562 C24.555,0.592 22.688,-0.000 20.877,-0.000 L20.877,-0.000 Z">
+                        </path>
+                    </g>
+                </svg>
+            </span>
+        </div>
+    </div>
+    </div>
+
+    <!-- Slideshow Script -->
+    <script>
+        // set s1 s3 s3 background Images
+        S1 = document.getElementById('S1')
+        S2 = document.getElementById('S2')
+        S3 = document.getElementById('S3')
+
+        img1 = "{% static 'img/a1.jpg' %}"
+        img2 = "{% static 'img/a2.jpg' %}"
+
+        S1.style.backgroundImage = `url(${img1})`
+        S2.style.backgroundImage = `url(${img2})`
+        S3.style.backgroundImage = `url(${img1})`
+
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const interval = 3000; // Change slide every 3 seconds
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Start the slideshow
+        setInterval(nextSlide, interval);
+        showSlide(currentSlide);
+    </script>
+</body>
+
+</html>
