@@ -15,10 +15,9 @@ idna==3.10
 pillow==11.0.0
 proto-plus==1.25.0
 protobuf==5.28.3
-psycopg2-binary==2.9.9
+psycopg2==2.9.10
 pyasn1==0.6.1
 pyasn1_modules==0.4.1
-python-dotenv==1.0.1
 requests==2.32.3
 rsa==4.9
 sqlparse==0.5.1
