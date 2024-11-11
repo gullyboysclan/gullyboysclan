@@ -81,27 +81,27 @@ WSGI_APPLICATION = 'gbc.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': "verceldb",
-#         'URL_NO_SSL':"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb",
-#         "URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
-#         "PRISMA_URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15",
-#         "URL_NON_POOLING":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
-#         'USER': "default",
-#         'PASSWORD':"oJZ4tAGzwf6v",
-#         "HOST":"ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech",
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "verceldb",
+        'URL_NO_SSL':"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb",
+        "URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+        "PRISMA_URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15",
+        "URL_NON_POOLING":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+        'USER': "default",
+        'PASSWORD':"oJZ4tAGzwf6v",
+        "HOST":"ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech",
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
