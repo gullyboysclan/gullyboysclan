@@ -21,7 +21,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     unique_id = models.UUIDField(default=uuid.uuid4,editable=False,unique=True)
-    image = models.ImageField(upload_to='gbc/productImages/',null=True,blank=True)
+    image = models.ImageField(upload_to='productImages/',null=True,blank=True)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     product_ordering = models.PositiveIntegerField(null=True,blank=True)
