@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from google.oauth2 import service_account 
+from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,12 +79,28 @@ WSGI_APPLICATION = 'gbc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "verceldb",
+        'URL_NO_SSL':"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb",
+        "URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+        "PRISMA_URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15",
+        "URL_NON_POOLING":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+        'USER': "default",
+        'PASSWORD':"oJZ4tAGzwf6v",
+        "HOST":"ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech",
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -113,6 +132,27 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# #Google Cloud Storage settings
+GS_PROJECT_ID = 'precise-line-437900-m9'
+GS_BUCKET_NAME = 'activistimages'
+
+# Get the JSON key data from environment variable
+google_cloud_key = os.getenv('KEY')
+
+# Parse the JSON key
+google_cloud_info = json.loads(google_cloud_key)
+
+# settings.py
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
+    google_cloud_info
+)
+
+# Media files (uploads)
+GS_MEDIA_BUCKET_NAME = GS_BUCKET_NAME
+MEDIA_URL = f'https://storage.googleapis.com/{GS_MEDIA_BUCKET_NAME}/'
 
 
 # Static files (CSS, JavaScript, Images)
