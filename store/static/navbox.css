@@ -35,3 +35,83 @@ footer {
     left: 0;
     right: 0;
 }
+/* Overlay for background dimming */
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+/* Menu slider */
+#menu-slider {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 500px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    
+}
+
+/* Menu header */
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+/* Menu items list */
+#menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 20px 10px;
+}
+
+#menu-items li {
+    margin-bottom: 15px;
+}
+
+#menu-items a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+
+/* Social icons */
+#menu-footer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.social-icon svg:hover {
+    transform: scale(1.1);
+}
+
+/* Active class to show menu */
+#menu-slider.active {
+    right: 0;
+}
+@media (max-width: 600px) {
+  
+    #menu-slider {
+        width: 100%;
+    }
+}

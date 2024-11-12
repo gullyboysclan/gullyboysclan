@@ -69,6 +69,61 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.8);
         }
+        #cart-icon{
+    cursor: pointer;
+}
+#cart-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: flex-end;
+    z-index: 1000;
+}
+
+/* Cart Menu */
+#cart-menu {
+    width: 500px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding: 20px;
+    opacity: 1;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+/* Active State */
+#cart-overlay.show {
+    display: flex;
+}
+
+#cart-menu.show {
+    transform: translateX(0);
+}
+
+/* Close Button */
+#close-cart {
+   
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  
+}
+#checkout-btn{
+    background-color: green;
+    color: white;
+    width: 200px;
+    padding: 10px;
+    border: none;
+    font-size: medium;
+}
+
     </style>
     <link rel="stylesheet" href="{% static 'store.css' %}">
 </head>
@@ -84,7 +139,7 @@
 
         <!-- Navigation Box -->
         <div class="nav-box" >
-            <div><span><svg width="35px" height="35px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div style="cursor: pointer;"><span onclick="openMenu()"><svg width="35px" height="35px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -95,7 +150,7 @@
             <div class="img-box">
                 <img src="{% static 'img/logo_outline2.svg' %}" alt="" style="padding: 0px 10px;">
             </div>
-            <div class="left-box" style="margin-right: 15px;">
+            <div class="left-box" style="margin-right: 15px;"  id="cart-icon">
                 <span><svg fill="#000000" width="35px" height="35px" viewBox="0 0 256 256" id="Flat"
                         xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -109,12 +164,82 @@
                
             </div>
         </div>
+<div id="menu-overlay">
+    <div id="menu-slider">
+        <div class="menu-header">
+            <h2>Menu</h2>
+
+            <svg style="cursor: pointer;" id="close-menu" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L16.9 7.1" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M7 7L16.9 16.9" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </div>
+        <ul id="menu-items">
+            <li><a href="{% url 'homePage' %}">Home</a></li>
+            <li><a href="{% url 'store' %}">Store</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'lookbook' %}">Lookbook</a></li>
+
+        </ul>
+        <div id="menu-footer">
+            <a href="https://www.instagram.com/gullyboysclan/" target="_blank" class="social-icon">
+                <svg width="35px" height="35px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <title>instagram [#167]</title>
+                        <desc>Created with Sketch.</desc>
+                        <defs> </defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Dribbble-Light-Preview" transform="translate(-340.000000, -7439.000000)"
+                                fill="#000000">
+                                <g id="icons" transform="translate(56.000000, 160.000000)">
+                                    <path
+                                        d="M289.869652,7279.12273 C288.241769,7279.19618 286.830805,7279.5942 285.691486,7280.72871 C284.548187,7281.86918 284.155147,7283.28558 284.081514,7284.89653 C284.035742,7285.90201 283.768077,7293.49818 284.544207,7295.49028 C285.067597,7296.83422 286.098457,7297.86749 287.454694,7298.39256 C288.087538,7298.63872 288.809936,7298.80547 289.869652,7298.85411 C298.730467,7299.25511 302.015089,7299.03674 303.400182,7295.49028 C303.645956,7294.859 303.815113,7294.1374 303.86188,7293.08031 C304.26686,7284.19677 303.796207,7282.27117 302.251908,7280.72871 C301.027016,7279.50685 299.5862,7278.67508 289.869652,7279.12273 M289.951245,7297.06748 C288.981083,7297.0238 288.454707,7296.86201 288.103459,7296.72603 C287.219865,7296.3826 286.556174,7295.72155 286.214876,7294.84312 C285.623823,7293.32944 285.819846,7286.14023 285.872583,7284.97693 C285.924325,7283.83745 286.155174,7282.79624 286.959165,7281.99226 C287.954203,7280.99968 289.239792,7280.51332 297.993144,7280.90837 C299.135448,7280.95998 300.179243,7281.19026 300.985224,7281.99226 C301.980262,7282.98483 302.473801,7284.28014 302.071806,7292.99991 C302.028024,7293.96767 301.865833,7294.49274 301.729513,7294.84312 C300.829003,7297.15085 298.757333,7297.47145 289.951245,7297.06748 M298.089663,7283.68956 C298.089663,7284.34665 298.623998,7284.88065 299.283709,7284.88065 C299.943419,7284.88065 300.47875,7284.34665 300.47875,7283.68956 C300.47875,7283.03248 299.943419,7282.49847 299.283709,7282.49847 C298.623998,7282.49847 298.089663,7283.03248 298.089663,7283.68956 M288.862673,7288.98792 C288.862673,7291.80286 291.150266,7294.08479 293.972194,7294.08479 C296.794123,7294.08479 299.081716,7291.80286 299.081716,7288.98792 C299.081716,7286.17298 296.794123,7283.89205 293.972194,7283.89205 C291.150266,7283.89205 288.862673,7286.17298 288.862673,7288.98792 M290.655732,7288.98792 C290.655732,7287.16159 292.140329,7285.67967 293.972194,7285.67967 C295.80406,7285.67967 297.288657,7287.16159 297.288657,7288.98792 C297.288657,7290.81525 295.80406,7292.29716 293.972194,7292.29716 C292.140329,7292.29716 290.655732,7290.81525 290.655732,7288.98792"
+                                        id="instagram-[#167]"> </path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+
+        </div>
+    </div>
+</div>
+<div id="cart-overlay">
+    <div id="cart-menu">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Your Cart</h2>
+
+            <svg id="close-cart" style="cursor: pointer;" id="close-menu" width="30px" height="30px" viewBox="0 0 24 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L16.9 7.1" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M7 7L16.9 16.9" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </div>
+        <div id="cart-items">
+            <!-- Dynamic cart items will be inserted here -->
+        </div>
+        <div id="cart-footer">
+            <div id="total-price" style="color: green;">Total: GHS 0.00</div>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <a href="{% url 'checkout' %}">
+                    <button id="checkout-btn" style="cursor: pointer;">Checkout</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <!-- Shop Collection Button -->
         <div
-            style="position: relative; top: 50%; margin: 0 auto; padding: 10px; background-color: white; width: fit-content;">
+            style="position: relative; top: 50%; margin: 0 auto; padding: 10px; border: 1px solid white; width: fit-content;">
             <a href="{% url 'store' %}" style="display: flex; align-items: center;">
-                <span>SHOP COLLECTION</span>
+                <span style="color: white;">SHOP COLLECTION</span>
                 <span>
                     
                             <?xml version="1.0" standalone="no"?>
@@ -137,13 +262,14 @@
     <!-- Footer -->
     <div class="footer-box">
         <div style="display: flex; justify-content: center; gap: 20px; border-top: 1px solid #f0f0f0; padding: 30px;">
-            <div>Lookbook</div>
-            <div>Contact</div>
+            <a href="{% url 'lookbook' %}"><div>Lookbook</div></a>
+            <a href="{% url 'contact' %}"><div>Contact</div></a>
         </div>
     <div
         style="color:#9d9d9d; border-top: 1px solid #f0f0f0; padding: 40px 0px; margin: 0px 10px; display: flex; justify-content: space-between; align-items: center;">
         <div>&copy; GullyBoysClan 2024</div>
         <div style="display: flex; align-items: center; gap: 5px;">
+           <a href="https://www.instagram.com/gullyboysclan/">
             <span><svg width="35px" height="35px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -160,21 +286,156 @@
                             stroke-linecap="round"></rect>
                     </g>
                 </svg></span>
-            <span>
-                <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="25px"
-                    height="25px" viewBox="0 0 31.812 26">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M20.877,2.000 C22.519,2.000 24.382,2.652 25.426,3.738 C26.724,3.486 27.949,3.025 29.050,2.386 C28.625,3.687 27.718,4.779 26.540,5.469 C27.693,5.332 28.797,5.035 29.820,4.590 C29.054,5.707 28.087,6.690 26.971,7.477 C26.981,7.715 26.987,7.955 26.987,8.195 C26.987,15.562 21.445,24.000 10.939,24.000 C7.715,24.000 4.507,23.133 1.982,21.551 C2.428,21.605 2.883,21.631 3.343,21.631 C6.019,21.631 8.482,20.740 10.439,19.242 C7.937,19.199 5.827,17.586 5.103,15.373 C5.450,15.437 5.810,15.473 6.178,15.473 C6.696,15.473 7.203,15.406 7.681,15.277 C5.068,14.768 3.100,12.514 3.100,9.813 C3.100,9.787 3.100,9.764 3.100,9.740 C3.871,10.158 4.750,10.410 5.687,10.440 C4.154,9.437 3.147,7.734 3.147,5.799 C3.147,4.777 3.428,3.818 3.919,2.998 C6.735,6.367 10.945,8.588 15.693,8.822 C15.594,8.414 15.543,7.984 15.543,7.553 C15.543,4.473 17.721,2.000 20.877,2.000 M29.820,4.590 L29.825,4.590 M20.877,-0.000 C17.033,-0.000 14.060,2.753 13.614,6.552 C10.425,5.905 7.524,4.204 5.440,1.711 C5.061,1.257 4.503,0.998 3.919,0.998 C3.867,0.998 3.815,1.000 3.763,1.004 C3.123,1.055 2.547,1.413 2.216,1.966 C1.525,3.122 1.159,4.447 1.159,5.799 C1.159,6.700 1.321,7.579 1.625,8.400 C1.300,8.762 1.113,9.238 1.113,9.740 L1.113,9.813 C1.113,11.772 1.882,13.589 3.160,14.952 C3.087,15.294 3.103,15.655 3.215,15.998 C3.657,17.348 4.459,18.510 5.499,19.396 C4.800,19.552 4.079,19.631 3.343,19.631 C2.954,19.631 2.577,19.609 2.222,19.565 C2.141,19.556 2.061,19.551 1.981,19.551 C1.148,19.551 0.391,20.078 0.108,20.886 C-0.202,21.770 0.140,22.753 0.932,23.249 C3.764,25.023 7.318,26.000 10.939,26.000 C17.778,26.000 22.025,22.843 24.383,20.195 C27.243,16.984 28.907,12.718 28.972,8.455 C29.899,7.682 30.717,6.790 31.410,5.792 C31.661,5.458 31.810,5.041 31.810,4.590 C31.810,3.909 31.473,3.308 30.958,2.946 C31.181,2.176 30.925,1.342 30.303,0.833 C29.940,0.537 29.496,0.386 29.049,0.386 C28.708,0.386 28.365,0.474 28.056,0.654 C27.391,1.040 26.680,1.344 25.931,1.562 C24.555,0.592 22.688,-0.000 20.877,-0.000 L20.877,-0.000 Z">
-                        </path>
-                    </g>
-                </svg>
-            </span>
+           </a> 
+          
         </div>
     </div>
     </div>
+    <script>
+        // JavaScript for opening and closing the menu slider
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuSlider = document.getElementById('menu-slider');
+        const closeMenuButton = document.getElementById('close-menu');
+
+        // Function to open the menu
+        function openMenu() {
+            menuOverlay.style.display = 'block';
+            menuSlider.classList.add('active');
+        }
+
+        // Function to close the menu
+        function closeMenu() {
+            menuSlider.classList.remove('active');
+            setTimeout(() => {
+                menuOverlay.style.display = 'none';
+            }, 300); // Match the transition duration
+        }
+
+        // Event listener for closing the menu
+        closeMenuButton.addEventListener('click', closeMenu);
+
+        // Event listener for clicking outside the menu slider
+        menuOverlay.addEventListener('click', (event) => {
+            if (event.target === menuOverlay) {
+                closeMenu();
+            }
+        });
+
+    </script>
+    <script>
+        cartItemsContainer = document.getElementById('cart-items')
+        totalPriceElement = document.getElementById('total-price')
+
+        function renderCart() {
+            // Retrieve the cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItemsContainer.innerHTML = ''; // Clear the container before rendering
+
+            // If the cart is empty, display a message
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align:center;">Your cart is empty.</p>';
+                totalPriceElement.textContent = 'Total: GHS 0.00';
+                document.getElementById('cart-footer').style.display = 'none'
+                return;
+
+            }
+            document.getElementById('cart-footer').style.display = 'block'
+            let totalPrice = 0;
+            // Loop through each item in the cart
+            cart.forEach((item, index) => {
+                const { name, size, quantity, price, image } = item;
+                const itemTotal = price * quantity;
+                totalPrice += itemTotal;
+
+                // Create a cart item element
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                <div class="cart-item-info" style="display: flex; width:100%;">
+                <button class="remove-item-btn" data-index="${index}" style="background: none; border: none; cursor: pointer;">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 17L16.9 7.1" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M7 7L16.9 16.9" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                    <img src="${image}" alt="${name}" class="cart-item-image" style="width:120px; height:90px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:5px;">
+                         <h4>${name}</h4>
+                        <p>x${quantity}</p>
+                        </div>          
+                        <div>Size: ${size}</div>
+                    </div>
+                    
+                </div>
+                <div style="display:flex; width:100%; justify-content:right;"><p>GHS ${price}</p></div>
+              
+            `;
+
+                // Append the cart item to the container
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            // Update the total price
+            totalPriceElement.textContent = `Total: GHS ${totalPrice.toFixed(2)}`;
+
+        }
+        renderCart();
+        function removeCartItem(index) {
+            // Retrieve the cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            // Remove the item at the given index
+            cart.splice(index, 1);
+            // Update localStorage with the modified cart
+            localStorage.setItem('cart', JSON.stringify(cart));
+            // Re-render the cart
+            renderCart();
+        }
+        // Event listener for the remove button
+        cartItemsContainer.addEventListener('click', (event) => {
+            if (event.target.closest('.remove-item-btn')) {
+                const index = event.target.closest('.remove-item-btn').dataset.index;
+                removeCartItem(index);
+            }
+        });
+
+
+    </script>
+    <script>
+        // Get elements
+        const cartIcon = document.getElementById('cart-icon');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartMenu = document.getElementById('cart-menu');
+        const closeCart = document.getElementById('close-cart');
+
+        // Show Cart Menu
+        cartIcon.addEventListener('click', () => {
+            cartOverlay.classList.add('show');
+            cartMenu.classList.add('show');
+            document.body.style.overflow = 'hidden'
+
+        });
+
+        // Hide Cart Menu
+        closeCart.addEventListener('click', () => {
+            cartOverlay.classList.remove('show');
+            cartMenu.classList.remove('show');
+            document.body.style.overflow = 'auto';
+
+        });
+
+        // Hide Cart Menu when clicking outside of it
+        cartOverlay.addEventListener('click', (e) => {
+            if (e.target === cartOverlay) {
+                cartOverlay.classList.remove('show');
+                cartMenu.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+
+
+        });
+
+    </script>
 
     <!-- Slideshow Script -->
     <script>
@@ -209,6 +470,7 @@
         setInterval(nextSlide, interval);
         showSlide(currentSlide);
     </script>
+
 </body>
 
 </html>

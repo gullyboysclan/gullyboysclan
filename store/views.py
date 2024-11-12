@@ -73,3 +73,8 @@ class LookBook(View):
 
     def get(self,request):
         return render(request,'lookbook.html')
+
+class ContactForm(View):
+    
+    def get(self, request):
+        return render(request, 'contact.html')
