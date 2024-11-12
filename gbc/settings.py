@@ -82,27 +82,27 @@ WSGI_APPLICATION = 'gbc.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "verceldb",
-        'URL_NO_SSL':"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb",
-        "URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
-        "PRISMA_URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15",
-        "URL_NON_POOLING":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
-        'USER': "default",
-        'PASSWORD':"oJZ4tAGzwf6v",
-        "HOST":"ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech",
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': "verceldb",
+#         'URL_NO_SSL':"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb",
+#         "URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+#         "PRISMA_URL":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15",
+#         "URL_NON_POOLING":"postgres://default:oJZ4tAGzwf6v@ep-yellow-meadow-a4pomt2w.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+#         'USER': "default",
+#         'PASSWORD':"oJZ4tAGzwf6v",
+#         "HOST":"ep-yellow-meadow-a4pomt2w-pooler.us-east-1.aws.neon.tech",
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -145,26 +145,20 @@ USE_TZ = True
 # MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
 
 
+# GS_PROJECT_ID = 'precise-line-437900-m9'
+# GS_BUCKET_NAME = 'gboys-bucket'
 
-#Google Cloud Storage settings
-GS_PROJECT_ID = 'precise-line-437900-m9'
-GS_BUCKET_NAME = 'gboys-bucket'
+# # settings.py
+# DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#     os.path.join(BASE_DIR, 'gboys.json')
+# )
+# # Media files (uploads)
+# GS_MEDIA_BUCKET_NAME = GS_BUCKET_NAME
+# MEDIA_URL = f'https://storage.googleapis.com/{GS_MEDIA_BUCKET_NAME}/'
 
-# Get the JSON key data from environment variable
-google_cloud_key = os.getenv('KEY')
-
-# Parse the JSON key
-google_cloud_info = json.loads(google_cloud_key)
-
-# settings.py
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
-    google_cloud_info
-)
-
-# Media files (uploads)
-GS_MEDIA_BUCKET_NAME = GS_BUCKET_NAME
-MEDIA_URL = f'https://storage.googleapis.com/{GS_MEDIA_BUCKET_NAME}/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = 'productionFiles'

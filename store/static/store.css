@@ -9,6 +9,7 @@
     display: flex;
     z-index: 1;
     justify-content: space-between;
+    align-items: center;
 }
 a{
     text-decoration: none;
@@ -16,10 +17,11 @@ a{
 }
 .nav-box div{
     align-self: center;
+
 }
 .nav-box .img-box img{ 
-    width: 100px;
-    max-width: 100px;
+    width: 70px;
+    max-width: 70px;
 }
 .left-box{
     display: flex;

@@ -34,7 +34,7 @@
 
 /* Cart Menu */
 #cart-menu {
-    width: 300px;
+    width: 500px;
     height: 100%;
     background-color: #fff;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
@@ -43,6 +43,7 @@
     padding: 20px;
     opacity: 1;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 /* Active State */
@@ -62,47 +63,128 @@
     cursor: pointer;
   
 }
+#checkout-btn{
+    background-color: green;
+    color: white;
+    width: 200px;
+    padding: 10px;
+    border: none;
+    font-size: medium;
+}
+  .marquee {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box;
+        background-color: #9d9d9d;
+    }
 
+    .marquee-content {
+        display: inline-block;
+        white-space: nowrap;
+        animation: scroll-text 20s linear infinite;
+    }
+
+    .marquee-content span {
+        display: inline-block;
+        margin: 0;
+        padding-right: 10px;
+    }
+
+    @keyframes scroll-text {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    @media (max-width: 600px) {
+
+    #cart-menu{
+        width: 100%;
+    }
+}
     </style>
 </head>
 
 <body>
-    <div class="nav-box">
+    <div class="nav-box" style="align-items: center;">
+        <div>
+            <span>
+                <svg width="35px" height="35px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 8.1H19V6.9H6V8.1ZM6 18.1H19V16.9H6V18.1ZM6 13.1H19V11.9H6V13.1Z" fill="#121923"></path>
+                </svg>
+            </span>
+        </div>
         <div class="img-box">
             <img src="{% static 'img/logo_outline2.svg' %}" style="padding: 0px 10px;" alt="">
         </div>
-        <div class="left-box">
-            <span id="cart-icon"><svg fill="#000000" width="35px" height="35px" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
+        <div class="left-box" id="cart-icon">
+            <span>
+                <svg fill="#000000" width="35px" height="35px" viewBox="0 0 256 256" id="Flat"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M216,68H171.81006a43.99152,43.99152,0,0,0-87.62012,0H40A12.01312,12.01312,0,0,0,28,80V208a12.01312,12.01312,0,0,0,12,12H216a12.01312,12.01312,0,0,0,12-12V80A12.01312,12.01312,0,0,0,216,68ZM128,36a36.04775,36.04775,0,0,1,35.77246,32H92.22754A36.04775,36.04775,0,0,1,128,36Zm92,172a4.004,4.004,0,0,1-4,4H40a4.004,4.004,0,0,1-4-4V80a4.004,4.004,0,0,1,4-4H84v28a4,4,0,0,0,8,0V76h72v28a4,4,0,0,0,8,0V76h44a4.004,4.004,0,0,1,4,4Z">
                     </path>
-                </g>
-            </svg></span>
-         
-            <span><svg width="35px" height="35px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <path d="M6 8.1H19V6.9H6V8.1ZM6 18.1H19V16.9H6V18.1ZM6 13.1H19V11.9H6V13.1Z" fill="#121923"></path>
-                </g>
-            </svg></span>
+                </svg>
+            </span>
         </div>
     </div>
-    <!-- Cart Overlay -->
-    <div id="cart-overlay">
-        <div id="cart-menu">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2>Your Cart</h2>
-                <button id="close-cart">Close</button>
-            </div>
-            <div id="cart-items">
-                <!-- Dynamic cart items will go here -->
+<div class="marquee" style="margin-top: 120px;">
+    <div class="marquee-content">
+        
+        <span>GULLY BOYS CLAN FINEST</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>SINCE 2021 </span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>FRESH OUTTA THE CUT </span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+    
+        <!-- Duplicate Content for Seamless Loop -->
+      
+        <span>GULLY BOYS CLAN FINEST</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>SINCE 2021</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>FRESH OUTTA THE CUT</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+
+        <span>GULLY BOYS CLAN FINEST</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>SINCE 2021</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>FRESH OUTTA THE CUT</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+    
+        <span>GULLY BOYS CLAN FINEST</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>SINCE 2021</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+        <span>FRESH OUTTA THE CUT</span>
+        <span><img src="{% static 'img/logo_outline2.svg' %}" style="height: 30px;" alt=""></span>
+    </div>
+</div>
+<div id="cart-overlay">
+    <div id="cart-menu">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Your Cart</h2>
+            <button id="close-cart">Close</button>
+        </div>
+        <div id="cart-items">
+            <!-- Dynamic cart items will be inserted here -->
+        </div>
+        <div id="cart-footer">
+            <div id="total-price" style="color: green;">Total: GHS 0.00</div>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <a href="{% url 'checkout' %}">
+                    <button id="checkout-btn" style="cursor: pointer;">Checkout</button>
+                </a>
             </div>
         </div>
     </div>
+</div>
+
     <div id="stock">Stock</div>
     <div class="product-container">
         {% for product in products %}
@@ -131,6 +213,86 @@
         </div>
     </div>
     <script>
+        cartItemsContainer = document.getElementById('cart-items')
+        totalPriceElement = document.getElementById('total-price')
+
+        function renderCart() {
+            // Retrieve the cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItemsContainer.innerHTML = ''; // Clear the container before rendering
+
+            // If the cart is empty, display a message
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align:center;">Your cart is empty.</p>';
+                totalPriceElement.textContent = 'Total: GHS 0.00';
+                document.getElementById('cart-footer').style.display = 'none'
+                return;
+
+            }
+            document.getElementById('cart-footer').style.display = 'block'
+            let totalPrice = 0;
+            // Loop through each item in the cart
+            cart.forEach((item, index) => {
+                const { name, size, quantity, price, image } = item;
+                const itemTotal = price * quantity;
+                totalPrice += itemTotal;
+
+                // Create a cart item element
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                <div class="cart-item-info" style="display: flex; width:100%;">
+                <button class="remove-item-btn" data-index="${index}" style="background: none; border: none; cursor: pointer;">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 17L16.9 7.1" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M7 7L16.9 16.9" stroke="#000" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                    <img src="${image}" alt="${name}" class="cart-item-image" style="width:120px; height:90px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:5px;">
+                         <h4>${name}</h4>
+                        <p>x${quantity}</p>
+                        </div>          
+                        <div>Size: ${size}</div>
+                    </div>
+                    
+                </div>
+                <div style="display:flex; width:100%; justify-content:right;"><p>GHS ${price}</p></div>
+              
+            `;
+
+                // Append the cart item to the container
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            // Update the total price
+            totalPriceElement.textContent = `Total: GHS ${totalPrice.toFixed(2)}`;
+
+        }
+        renderCart();
+        function removeCartItem(index) {
+            // Retrieve the cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            // Remove the item at the given index
+            cart.splice(index, 1);
+            // Update localStorage with the modified cart
+            localStorage.setItem('cart', JSON.stringify(cart));
+            // Re-render the cart
+            renderCart();
+        }
+        // Event listener for the remove button
+        cartItemsContainer.addEventListener('click', (event) => {
+            if (event.target.closest('.remove-item-btn')) {
+                const index = event.target.closest('.remove-item-btn').dataset.index;
+                removeCartItem(index);
+            }
+        });
+
+
+    </script>
+
+    <script>
         // Get elements
             const cartIcon = document.getElementById('cart-icon');
             const cartOverlay = document.getElementById('cart-overlay');
@@ -141,12 +303,14 @@
             cartIcon.addEventListener('click', () => {
                 cartOverlay.classList.add('show');
                 cartMenu.classList.add('show');
+                 document.body.style.overflow = 'hidden';
             });
 
             // Hide Cart Menu
             closeCart.addEventListener('click', () => {
                 cartOverlay.classList.remove('show');
                 cartMenu.classList.remove('show');
+                 document.body.style.overflow = 'auto';
             });
 
             // Hide Cart Menu when clicking outside of it
@@ -155,6 +319,7 @@
                     cartOverlay.classList.remove('show');
                     cartMenu.classList.remove('show');
                 }
+                 document.body.style.overflow = 'auto';
             });
 
     </script>
