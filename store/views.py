@@ -68,3 +68,8 @@ def checkout(request):
 
      
     return render(request,'checkout.html')
+
+class LookBook(View):
+
+    def get(self,request):
+        return render(request,'lookbook.html')
