@@ -136,19 +136,39 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Google Cloud Storage settings
+# # Google Cloud Storage settings
+# GS_BUCKET_NAME = 'gboys-bucket'
+# GS_CREDENTIALS = os.path.join(BASE_DIR, 'gboys.json')
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+# GS_FILE_OVERWRITE = False
+# MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
+
+
+
+#Google Cloud Storage settings
+GS_PROJECT_ID = 'precise-line-437900-m9'
 GS_BUCKET_NAME = 'gboys-bucket'
-GS_CREDENTIALS = os.path.join(BASE_DIR, 'gboys.json')
 
+# Get the JSON key data from environment variable
+google_cloud_key = os.getenv('KEY')
+
+# Parse the JSON key
+google_cloud_info = json.loads(google_cloud_key)
+
+# settings.py
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_FILE_OVERWRITE = False
-MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
+    google_cloud_info
+)
 
+# Media files (uploads)
+GS_MEDIA_BUCKET_NAME = GS_BUCKET_NAME
+MEDIA_URL = f'https://storage.googleapis.com/{GS_MEDIA_BUCKET_NAME}/'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = 'productionFiles'
 
-MEDIA_ROOT = ''
 
 
 # Default primary key field type
