@@ -414,9 +414,13 @@
                     </div>
 
                 </div>
+            {% if product.stock != 0 %}
                 <div id="addToCart" style="margin-bottom: 100px;">
                     add to cart
                 </div>
+            {% else %}
+            <img src="{% static 'img/sold_out.png' %}" id="addToCart" alt="" style="border: none;">
+            {% endif %}
             </div>
         </div>
     </div>
