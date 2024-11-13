@@ -242,7 +242,9 @@
       
                             <div class="product-card">
                                 <a href="{%url 'productDetail' product.unique_id %}">
-                                <div class="product-image-container"><img src="{{product.image.url}}" alt="" class="product-image">
+
+                                <div class="product-image-container">
+                                    <img src="{{product.image.url}}" alt="" class="product-image">
                                     {% if not product.is_in_stock %}
                                     <img src="{% static 'img/sold_out.png' %}" alt="Sold Out" class="soldout-overlay">
                                     {% endif %}
